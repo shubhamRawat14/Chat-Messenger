@@ -88,7 +88,7 @@ public class UserServices {
         }
         return "Incorrect mobile no. or password\n";
     }
-    public Iterable<User> fetchUserListService(){
-        return userRepository.findAll();
+    public User fetchUserListService(final User user){
+        return userRepository.findUser(user.getMobile());
     }
 }

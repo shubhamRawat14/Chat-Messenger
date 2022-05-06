@@ -26,7 +26,7 @@ public class UserController {
        return userServices.loginService(receivedUserDetails);
     }
     @PostMapping(path = "/fetch/list")
-    public @ResponseBody Iterable<User> fetchUserList() {
-       return userServices.fetchUserListService();
+    public @ResponseBody User fetchUserList(@RequestBody User receivedUserDetails) {
+       return userServices.fetchUserListService(receivedUserDetails);
     }
 }

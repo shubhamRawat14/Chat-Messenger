@@ -9,5 +9,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT * FROM user WHERE MOBILE = ?1 AND PASSWORD =?2  ", nativeQuery = true)
     User fetchUser(long mobile, String password);
 
-
+    @Query(value = "SELECT * FROM user WHERE MOBILE = ?1 ", nativeQuery = true)
+    User findUser(long mobile);
 }
