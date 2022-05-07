@@ -42,7 +42,6 @@ public class MessageService {
     public String deleteMessageForMe(final MessageModel messageModel){
         if (userRepository.existsById(messageModel.getId())){
             MessageModel messageModelDeleteForMe = userRepository.getById(messageModel.getId());
-            MessageService messageService = new MessageService();
             System.out.println(messageModel.getSenderId());
               //to check if user is sender
             if(userRepository.existsByIdAndSenderId(messageModel.getId(),
@@ -50,18 +49,19 @@ public class MessageService {
                 // to check if receiver is deleteForMe is true
                 System.out.println(messageModelDeleteForMe.isDeleteReceiverMessage());
                 if (messageModelDeleteForMe.isDeleteReceiverMessage()) {
-                    return messageService.deleteForEveryOne(messageModelDeleteForMe);
+                    userRepository.deleteById(messageModel.getId());
+                    return "message is deleted";
                 } else {
                     messageModelDeleteForMe.setDeleteSenderMessage(true);
                     userRepository.save(messageModelDeleteForMe);
                 }
             }
-
             //to check if user is receiver
             else if (userRepository.existsByIdAndReceiverId(messageModel.getId(),
                     messageModel.getSenderId())) {
                 if (messageModelDeleteForMe.isDeleteReceiverMessage()) {
-                    return messageService.deleteForEveryOne(messageModelDeleteForMe);
+                    userRepository.deleteById(messageModel.getId());
+                    return "message is deleted";
                 } else {
                     messageModelDeleteForMe.setDeleteReceiverMessage(true);
                     userRepository.save(messageModelDeleteForMe);
@@ -76,15 +76,11 @@ public class MessageService {
             }
         return "message is deleted for me";
     }
-
-
     public String deleteForEveryOne(final MessageModel messageModel){
-        System.out.println("751 data:"+messageModel.getId() +" \n"+ messageModel.getReceiverId()+" \n"+ messageModel.getSenderId()+" \n"+ messageModel.isDeleteReceiverMessage()+" \n"+ messageModel.isDeleteSenderMessage());
-
-        userRepository.deleteById(messageModel.getId());
+        System.out.println(messageModel.getId() +" \n"+ messageModel.getReceiverId()+" \n"+ messageModel.getSenderId()+" \n"+ messageModel.isDeleteReceiverMessage()+" \n"+ messageModel.isDeleteSenderMessage());
+        userRepository.delete(messageModel);
         return "message is deleted";
     }
-
     public List<MessageModel> getMessagesById(final MessageModel messageModel){
         System.out.println(messageModel.getSenderId());
         return userRepository.fetchMessageById(messageModel.getSenderId());

@@ -1,0 +1,29 @@
+server:
+  port: 9092
+
+eureka:
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: User-Module
+          uri: http://localhost:8081/
+          predicates:
+           - Path=/user/**
+        - id: group-messages
+          uri: http://localhost:8084/
+          predicates:
+           - Path=/group/**
+        - id: Group-Member-Module
+          uri: http://localhost:8082/
+          predicates:
+           - Path=/groupMember/**
+        - id: Message-Module
+          uri: http://localhost:8085/
+          predicates:
+            - Path=/message/**
