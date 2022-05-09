@@ -88,7 +88,8 @@ public class UserServices {
         }
         return "Incorrect mobile no. or password\n";
     }
-    public User fetchUserListService(final User user){
+    public User fetchUserListService( User user){
+        System.out.println("hi");
         return userRepository.findUser(user.getMobile());
     }
 }
