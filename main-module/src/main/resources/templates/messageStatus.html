@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>chat messenger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:each="listMessages : ${listMessages}"th:text="${listMessages}"></p>
+<p th:text="${error}" />
+<a href="/login">Logout</a>
+<a href="/sendMessage">chat</a>
+</body>
+</html>
+</html>

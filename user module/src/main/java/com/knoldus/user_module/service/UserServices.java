@@ -5,6 +5,8 @@ import com.knoldus.user_module.repository.UserRepository;
 import com.knoldus.user_module.validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.Date;
 /**
  * User Service.
@@ -80,16 +82,23 @@ public class UserServices {
         }
         return receivedUserDetails.getName() + " does not exist";
     }
-    public String loginService(User receivedUserDetails){
+    public User loginService(User receivedUserDetails){
         // For Authentication
         User user = userRepository.fetchUser(receivedUserDetails.getMobile(), receivedUserDetails.getPassword());
-        if(user != null) {
-            return "Welcome " +user.getName() + "\n ";
-        }
-        return "Incorrect mobile no. or password\n";
+//        if(user != null) {
+//            return "Welcome " +user.getName() + "\n ";
+//        }
+        return user;
     }
     public User fetchUserListService( User user){
-        System.out.println("hi");
         return userRepository.findUser(user.getMobile());
+    }
+    public User fetchUserRelationService(User user){
+        System.out.println(user.getId());
+        return userRepository.findUserById(user.getId());
+    }
+    public User searchUserbyMobile(Long mobile){
+        System.out.println(mobile);
+        return userRepository.findbyMobile(mobile);
     }
 }

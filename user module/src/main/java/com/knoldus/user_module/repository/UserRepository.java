@@ -11,4 +11,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT * FROM user WHERE MOBILE = ?1 ", nativeQuery = true)
     User findUser(long mobile);
+
+    @Query(value = "SELECT * FROM user WHERE id = ?1 ", nativeQuery = true)
+    User findUserById(int id);
+
+    @Query(value = "SELECT * FROM user WHERE mobile = ?1 ", nativeQuery = true)
+    User findbyMobile(Long mobile);
 }

@@ -1,7 +1,7 @@
 package com.knoldus.message_module.service;
 
 import com.knoldus.message_module.model.MessageModel;
-import com.knoldus.message_module.model.UserRepository;
+import com.knoldus.message_module.model.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MessageService {
     @Autowired
-    private UserRepository userRepository;
+    private MessageRepository userRepository;
 
     public  String sendData(MessageModel receiveMessageModel)
     {
@@ -84,5 +84,21 @@ public class MessageService {
     public List<MessageModel> getMessagesById(final MessageModel messageModel){
         System.out.println(messageModel.getSenderId());
         return userRepository.fetchMessageById(messageModel.getSenderId());
+    }
+    public List<Integer> getUserIdOfPreviousMessageService(int userId){
+        return userRepository.getUserIdOfPreviousMessageRepository(userId);
+    }
+    public List<MessageModel> getMessagesOneToOne(MessageModel messageModel){
+        //System.out.println(messageModel.);
+//        List<MessageModel> result= userRepository.getMessagesOneToOne(messageModel.getSenderId(),messageModel.getReceiverId());
+//        for (MessageModel message:result
+//             ) {
+//            System.out.println(message.getId());
+//            System.out.println(message.getSenderId());
+//            System.out.println(message.getReceiverId());
+//            System.out.println(message.getMessageBody());
+//
+//        }
+        return userRepository.getMessagesOneToOne(messageModel.getSenderId(),messageModel.getReceiverId());
     }
 }

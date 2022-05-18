@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Chat Messenger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Message</h1>
+<form action="#" th:action="@{/postMessage}" th:object="${message}" method="post">
+    <h4><p th:text="${error}" /></h4>
+    <p>mobile: <input type="tel" pattern="[0-9]{10}"th:field="*{mobile}"/></p>
+    <p>Message:<textarea datatype="text" rows="4" cols="50" th:field="*{message}"></textarea></p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>
