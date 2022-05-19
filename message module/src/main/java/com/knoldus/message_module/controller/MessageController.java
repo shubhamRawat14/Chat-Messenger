@@ -21,7 +21,8 @@ public class MessageController {
     }
     @PostMapping("/getUserIdOfPreviousMessage")
     public @ResponseBody List<Integer> getUserIdOfPreviousMessageController(@RequestBody User user){
-        //System.out.println((int) user.getId());
+        System.out.println((int) user.getId());
+        System.out.println();
         return messageService.getUserIdOfPreviousMessageService((int) user.getId());
     }
     //for getting all message which is send by senderId

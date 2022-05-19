@@ -14,9 +14,6 @@ import java.util.Date;
 
 @Service
 public class UserServices {
-    /**
-     *
-     */
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -94,11 +91,11 @@ public class UserServices {
         return userRepository.findUser(user.getMobile());
     }
     public User fetchUserRelationService(User user){
-        System.out.println(user.getId());
+      //  System.out.println(user.getId());
         return userRepository.findUserById(user.getId());
     }
     public User searchUserbyMobile(Long mobile){
-        System.out.println(mobile);
+        //System.out.println(mobile);
         return userRepository.findbyMobile(mobile);
     }
 }
